@@ -5,5 +5,4 @@ calibration = input.map { |line|
     result = "#{nums.first}#{nums.last}".to_i
 }
 
-p calibration
 p calibration.sum
