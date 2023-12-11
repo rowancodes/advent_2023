@@ -2,7 +2,6 @@ input = File.read("input.txt")
 input = input.split("\n")
 
 # sevenine should be "79" and not "7ine" so this is the best solution
-
 $word_to_number = {
     "one" => "o1e",
     "two" => "t2o",
@@ -16,7 +15,6 @@ $word_to_number = {
 }
 
 $re = Regexp.new($word_to_number.keys.map { |x| Regexp.escape(x) }.join('|'))
-
 
 def translate(line)
     result = line
