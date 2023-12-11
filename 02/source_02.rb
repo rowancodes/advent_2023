@@ -1,5 +1,5 @@
 class Round
-    attr_accessor :game_id
+    attr_accessor :game_id, :red_count, :green_count, :blue_count
     def initialize(game_id:, red_count: 0, green_count: 0, blue_count: 0)
         @game_id = game_id
         @red_count = red_count.to_i
@@ -43,13 +43,21 @@ end
 
 parse_input
 
-impossible_game_ids = []
+games = []
+100.times do |i|
+    games.push({id: i+1, min_red: 0, min_green: 0, min_blue: 0})
+end
+
 $all_rounds.each { |round|
-    if round.impossible?(max_red: 12, max_green: 13, max_blue: 14)
-        impossible_game_ids.push(round.game_id.to_i)
-    end
+    game = games.find {|game| game[:id] == round.game_id.to_i}
+    game[:min_red] = round.red_count if round.red_count > game[:min_red]
+    game[:min_green] = round.green_count if round.green_count > game[:min_green]
+    game[:min_blue] = round.blue_count if round.blue_count > game[:min_blue]
 }
 
-possible_game_ids =  (Array(1..100) - impossible_game_ids.uniq)
+sum = 0
+games.each { |game|
+    sum += game[:min_red] * game[:min_green] * game[:min_blue]
+}
 
-p possible_game_ids.sum
+p sum
