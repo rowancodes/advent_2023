@@ -20,8 +20,6 @@ class ScratchOffCard
     end
 end
 
-$all_scratch_cards = []
-
 def parse_input
     input = File.read("input.txt")
     input = input.split("\n")
@@ -34,4 +32,4 @@ parse_input.each do |line|
     total_score += ScratchOffCard.new(line).score
 end
 
-p total_score
+p total
